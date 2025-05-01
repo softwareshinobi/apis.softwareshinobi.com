@@ -6,9 +6,9 @@ services:
 ##
 ##########################################
 
-    software-shinobi-public-apis-proxy:
+    shinobi-proxy:
 
-        container_name: software-shinobi-public-apis-proxy
+        container_name: shinobi-proxy
 
         image: nginxproxy/nginx-proxy
 
@@ -38,9 +38,9 @@ services:
 
                 max-file: "3"
 
-    software-shinobi-public-apis-letsencrypt:
+    shinobi-letsencrypt:
 
-        container_name: software-shinobi-public-apis-letsencrypt
+        container_name: shinobi-letsencrypt
 
         image: jrcs/letsencrypt-nginx-proxy-companion
 
@@ -48,7 +48,7 @@ services:
 
         volumes_from:
 
-            - software-shinobi-public-apis-proxy
+            - shinobi-proxy
 
         volumes:
 
@@ -66,9 +66,9 @@ services:
 ##
 ##########################################
 
-    software-shinobi-public-apis-database:
+    shinobi-database:
 
-        container_name: software-shinobi-public-apis-database
+        container_name: shinobi-database
 
         image: mariadb
 
@@ -90,31 +90,31 @@ services:
 
             MYSQL_PASSWORD: shinobipublicapis
 
-    software-shinobi-public-apis-phpmyadmin:
+    shinobi-phpmyadmin:
 
-        container_name: software-shinobi-public-apis-phpmyadmin
+        container_name: shinobi-phpmyadmin
 
         image: beeyev/phpmyadmin-lightweight
 
         depends_on:
 
-           - software-shinobi-public-apis-database
+           - shinobi-database
 
         links:
 
-           - software-shinobi-public-apis-database
+           - shinobi-database
 
         ports:
 
-            - "36080:80"
+            - "3380:80"
 
         environment:
 
-            PMA_HOST: software-shinobi-public-apis-database
+            PMA_HOST: shinobi-database
 
-            VIRTUAL_HOST: database.softwareshinobi.digital
+            VIRTUAL_HOST: database.softwareshinobi.com
 
-            LETSENCRYPT_HOST: database.softwareshinobi.digital
+            LETSENCRYPT_HOST: database.softwareshinobi.com
 
 ##########################################
 ##
@@ -122,15 +122,15 @@ services:
 ##
 ##########################################
 
-    software-shinobi-public-apis-server:
+    apis.softwareshinobi.com:
 
-        container_name: software-shinobi-public-apis-server
+        container_name: apis.softwareshinobi.com
         
-        image: softwareshinobi/software-shinobi-public-apis-server
+        image: softwareshinobi/apis.softwareshinobi.com
 
         depends_on:
 
-           - software-shinobi-public-apis-database
+           - shinobi-database
 
         build: 
 
@@ -142,11 +142,11 @@ services:
 
         ports:
             
-            - "24888:8888"
+            - "8888:8888"
             
         environment:
 
-            DB_HOST: software-shinobi-public-apis-database
+            DB_HOST: shinobi-database
 
             DB_NAME: shinobipublicapis
 
@@ -154,15 +154,15 @@ services:
 
             DB_PASS: shinobipublicapis
 
-            VIRTUAL_HOST: apis.softwareshinobi.digital
+            VIRTUAL_HOST: apis.softwareshinobi.com
 
-            LETSENCRYPT_HOST: apis.softwareshinobi.digital
+            LETSENCRYPT_HOST: apis.softwareshinobi.com
 
-    software-shinobi-public-apis-docs:
+    docs.apis.softwareshinobi.com:
 
-        container_name: software-shinobi-public-apis-docs
+        container_name: docs.apis.softwareshinobi.com
 
-        image: softwareshinobi/software-shinobi-public-apis-docs
+        image: softwareshinobi/docs.apis.softwareshinobi.com
 
         build: 
 
@@ -170,12 +170,14 @@ services:
 
             dockerfile: Dockerfile
 
+        restart: always
+
         ports:
 
-            - "24080:80"
+            - "8880:80"
 
         environment:
 
-            VIRTUAL_HOST: docs.apis.softwareshinobi.digital
+            VIRTUAL_HOST: docs.apis.softwareshinobi.come
 
-            LETSENCRYPT_HOST: docs.apis.softwareshinobi.digital
+            LETSENCRYPT_HOST: docs.apis.softwareshinobi.com
