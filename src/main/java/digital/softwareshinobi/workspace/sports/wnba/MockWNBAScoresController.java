@@ -22,9 +22,7 @@ public class MockWNBAScoresController {
         "Dallas Wings",
         "New York Liberty",
         "Connecticut Sun",
-        "Golden State Valkyries", // Starting 2025 season
-        "Portland" // Planned expansion city, team name TBD, likely starting later
-    };
+        "Golden State Valkyries",};
 
     public MockWNBAScoresController() {
 
@@ -60,56 +58,68 @@ public class MockWNBAScoresController {
             gameData.put("date", date);
 
             String team1 = teams[i];
+
             String team2 = teams[i + 1];
+
             int score1 = scores[i];
+
             int score2 = scores[i + 1];
 
             gameData.put("away_team", team1);
+
             gameData.put("home_team", team2);
+
             gameData.put("away_score", score1);
+
             gameData.put("home_score", score2);
 
             int overUnder = (int) Math.floor(Math.random() * (170 - 130 + 1)) + 130;
+
             gameData.put("over_under", overUnder);
 
             if (Math.random() < 0.5) {
 
-                double moneylineUnderdog = Math.round(Math.random() * 150 + 100); // Range +100 to +250
+                double moneylineUnderdog = Math.round(Math.random() * 150 + 100);
 
-                // Negative moneyline for favorite (e.g., -200)
-                double moneylineFavorite = Math.round(-(Math.random() * 150 + 150)); // Range -150 to -300
+                double moneylineFavorite = Math.round(-(Math.random() * 150 + 150));
 
                 gameData.put("away_money_line", moneylineFavorite);
+
                 gameData.put("home_money_line", moneylineUnderdog);
 
             } else {
 
-                double moneylineUnderdog = Math.round(Math.random() * 150 + 100); // Range +100 to +250
+                double moneylineUnderdog = Math.round(Math.random() * 150 + 100);
 
-                // Negative moneyline for favorite (e.g., -200)
-                double moneylineFavorite = Math.round(-(Math.random() * 150 + 150)); // Range -150 to -300
+                double moneylineFavorite = Math.round(-(Math.random() * 150 + 150));
 
                 gameData.put("away_money_line", moneylineFavorite);
+
                 gameData.put("home_money_line", moneylineUnderdog);
             }
 
-            // Note: The original moneyline calculation for underdog was mathematically incorrect
-            // for standard moneyline representation. This provides a more typical range.
-            // Positive moneyline for underdog (e.g., +150)
-            //    gameData.put("favorite_moneyline", moneylineFavorite);
-            //
             gameList.add(gameData);
+
         }
 
         return gameList;
+
     }
 
     private static void shuffleArray(String[] array) {
+
         for (int i = array.length - 1; i > 0; i--) {
+
             int index = (int) Math.floor(Math.random() * (i + 1));
+
             String temp = array[index];
+
             array[index] = array[i];
+
             array[i] = temp;
+
         }
+
     }
+
 }
