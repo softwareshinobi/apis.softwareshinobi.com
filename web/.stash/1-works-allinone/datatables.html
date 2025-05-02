@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <table id="tableSwapi" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rotation Period</th>
+                <th>Orbital Period</th>
+                <th>Diameter</th>
+                <th>Climate</th>
+                <th>Gravity</th>
+                <th>Terrain</th>
+                <th>Water Surface</th>
+                <th>Population</th>
+            </tr>
+        </thead>
+        <tbody id="list-list"></tbody>
+    </table>    
+    <script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#tableSwapi").dataTable();
+
+            $.ajax({
+                url: 'http://huracan.softwareshinobi.com:8888/story',
+                type: 'get',
+                dataType: 'json',
+                success: function (result) {
+
+console.log("result",result)
+
+                    let daftar = result;
+
+                    var html = '';
+
+//alert("success!")
+
+
+
+console.log("daftar",daftar)
+
+
+                    $.each(daftar, function (i, data) {
+                        html += `<tr>
+              
+                          <td> ` + data.id + `</td>
+
+                                        <td>` + data.desription + `</td>
+              
+                                        <td> ` + data.project + ` <br></td>
+
+                                    </tr>`;
+
+                        //This is selector of my <tbody> in my table
+                        $("#list-list").html(html);
+                    });
+                }
+            });
+        })
+
+
+    </script>
+</body>
+</html>

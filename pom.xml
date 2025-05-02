@@ -18,11 +18,11 @@
     
     <groupId>digital.softwareshinobi</groupId>
     
-    <artifactId>software-shinobi-public-apis</artifactId>
+    <artifactId>software-shinobi-apis</artifactId>
     
     <version>1.0</version>
     
-    <name>software-shinobi-public-apis</name>
+    <name>software-shinobi-apis</name>
     
     <description>software-shinobi-public-apis</description>
 
