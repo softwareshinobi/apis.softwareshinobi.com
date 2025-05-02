@@ -144,6 +144,10 @@ services:
             
             - "8888:8888"
             
+        expose:
+            
+            - 8888
+
         environment:
 
             DB_HOST: shinobi-database
@@ -153,6 +157,8 @@ services:
             DB_USER: shinobipublicapis
 
             DB_PASS: shinobipublicapis
+
+            VIRTUAL_PORT: 8888
 
             VIRTUAL_HOST: apis.softwareshinobi.com
 
