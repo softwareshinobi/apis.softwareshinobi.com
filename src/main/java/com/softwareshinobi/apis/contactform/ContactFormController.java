@@ -7,7 +7,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("customer/contact")
+@RequestMapping("contact")
 public class ContactFormController {
 
     @Autowired
