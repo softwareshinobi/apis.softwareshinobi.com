@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css">  </head>
+<body>
+
+<div class="container mt-5">
+    <h1>Contact Us</h1>
+    <form id="contactForm">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+        </div>
+        <div class="mb-3">
+            <label for="emailAddress" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="emailAddress" name="emailAddress" required>
+        </div>
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="subject" name="subject">
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button onclick="processForm()" class="btn btn-primary">Submit</button>
+        <div id="form-response" class="mt-3"></div> </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    
+    
+function processForm() {
+
+//alert("process!!!");
+
+	console.debug("enter > processForm");	
+
+	projectPayload = JSON.stringify({
+
+		firstName: $("#firstName").val(),
+
+		lastName : $("#lastName").val(),
+
+		emailAddress:  $("#emailAddress").val(),
+
+		subject : $("#subject").val(),
+                
+		message : $("#message").val(),
+
+	});
+
+	console.debug("projectPayload / ", projectPayload);
+
+	$.ajax({
+
+		type: "PUT",
+
+		url: "http://localhost:8888/customer/contact",
+
+		data: projectPayload,
+		
+		contentType: "application/json; charset=utf-8",
+
+		crossDomain: true,
+
+		dataType: "text",
+
+		success: function (data, status, jqXHR) {
+
+                   alert("success!");
+                
+
+		},
+
+		error: function (jqXHR, status) {
+
+                   alert("error!");
+                
+			console.log("error during request /",jqXHR);
+
+		}
+
+	});
+
+}
+    
+</script>
+
+</body>
+</html>

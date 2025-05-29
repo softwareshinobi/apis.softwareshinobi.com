@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SoftwareShinobiAPIS" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="ALTERNATIVE_JRE_PATH" value="17" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="DB_HOST" value="intranet.softwareshinobi.com" />
+      <env name="DB_PORT" value="3306" />
+      <env name="DB_NAME" value="sandbox" />
+      <env name="DB_USER" value="sandbox" />
+      <env name="DB_PASS" value="sandbox" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.softwareshinobi.apis.SoftwareShinobiAPIS" />
+    <module name="software-shinobi-apis" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

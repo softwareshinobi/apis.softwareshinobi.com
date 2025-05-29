@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Forms</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function fetchContactForms11() {
+                // Stubbed API data (replace with actual API call later)
+                const stubbedData = [
+                    { id: 1, firstName: "John", lastName: "Doe", emailAddress: "john.doe@example.com", subject: "Inquiry", message: "Hello!" },
+                    { id: 2, firstName: "Jane", lastName: "Smith", emailAddress: "jane.smith@example.com", subject: "Question", message: "How are you?" },
+                    { id: 3, firstName: "Alice", lastName: "Johnson", emailAddress: "alice.johnson@example.com", subject: "Feedback", message: "Great service!" }
+                ];
+
+                // Clear existing table rows (except header)
+                $("#contactTable tbody").empty();
+
+                // Populate table with data
+                stubbedData.forEach(function(contact) {
+                    $("#contactTable tbody").append(
+                        "<tr>" +
+                        "<td>" + contact.id + "</td>" +
+                        "<td>" + contact.firstName + "</td>" +
+                        "<td>" + contact.lastName + "</td>" +
+                        "<td>" + contact.emailAddress + "</td>" +
+                        "<td>" + contact.subject + "</td>" +
+                        "<td>" + contact.message + "</td>" +
+                        "</tr>"
+                    );
+                });
+            }
+
+            // Initial fetch
+            fetchContactForms();
+
+            // Example of how to use a real API call (replace with your actual API endpoint)
+            
+            function fetchContactForms() {
+                $.ajax({
+                    url: "http://localhost:8888/customer/contact", // Replace with your actual API endpoint
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        // Clear existing table rows (except header)
+                        $("#contactTable tbody").empty();
+
+                        // Populate table with data
+                        data.forEach(function(contact) {
+                            $("#contactTable tbody").append(
+                                "<tr>" +
+                                "<td>" + contact.id + "</td>" +
+                                "<td>" + contact.firstName + "</td>" +
+                                "<td>" + contact.lastName + "</td>" +
+                                "<td>" + contact.emailAddress + "</td>" +
+                                "<td>" + contact.subject + "</td>" +
+                                "<td>" + contact.message + "</td>" +
+                                "</tr>"
+                            );
+                        });
+                    },
+                    error: function(error) {
+                        console.error("Error fetching contact forms:", error);
+                        alert("Error fetching contact forms.");
+                    }
+                });
+            }
+             
+
+        });
+    </script>
+</head>
+<body>
+    <h1>Contact Forms</h1>
+    <table id="contactTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
+</body>
+</html>

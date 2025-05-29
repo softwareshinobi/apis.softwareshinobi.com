@@ -15,7 +15,7 @@ pipeline {
             
             agent {
             
-                label "huracan"
+                label "sian"
             
             }
 
@@ -35,7 +35,7 @@ pipeline {
 
             agent {
             
-                label "huracan"
+                label "sian"
             
             }
 
