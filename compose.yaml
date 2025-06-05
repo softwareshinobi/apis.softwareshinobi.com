@@ -77,7 +77,7 @@ services:
             - /tmp/volumes/mariadb:/var/lib/mysql
 
         ports:
-    
+
             - "3306:3306"
 
         environment:
@@ -125,27 +125,27 @@ services:
     apis.softwareshinobi.com:
 
         container_name: apis.softwareshinobi.com
-        
-        image: softwareshinobi/apis.softwareshinobi.com
+
+        image: softwareshinobi/apis.softwareshinobi.com:server
 
         depends_on:
 
            - shinobi-database
 
-        build: 
+        build:
 
             context: .
 
             dockerfile: Dockerfile
-    
+
         restart: always
 
         ports:
-            
+
             - "8888:8888"
-            
+
         expose:
-            
+
             - 8888
 
         environment:
@@ -168,9 +168,9 @@ services:
 
         container_name: docs.apis.softwareshinobi.com
 
-        image: softwareshinobi/docs.apis.softwareshinobi.com
+        image: softwareshinobi/apis.softwareshinobi.com:docs
 
-        build: 
+        build:
 
             context: docs
 
