@@ -112,9 +112,9 @@ services:
 
             PMA_HOST: shinobi-database
 
-            VIRTUAL_HOST: database.softwareshinobi.com
+            VIRTUAL_HOST: database.softwareshinobi.online
 
-            LETSENCRYPT_HOST: database.softwareshinobi.com
+            LETSENCRYPT_HOST: database.softwareshinobi.online
 
 ##########################################
 ##
@@ -122,15 +122,15 @@ services:
 ##
 ##########################################
 
-    apis.softwareshinobi.com:
+    software-shinobi-apis:
 
-        container_name: apis.softwareshinobi.com
+        container_name: software-shinobi-apis
 
-        image: softwareshinobi/apis.softwareshinobi.com:server
+        image: softwareshinobi/software-shinobi-apis:production
 
         depends_on:
 
-           - shinobi-database
+            - shinobi-database
 
         build:
 
@@ -160,15 +160,39 @@ services:
 
             VIRTUAL_PORT: 8888
 
-            VIRTUAL_HOST: apis.softwareshinobi.com
+            VIRTUAL_HOST: apis.softwareshinobi.online
 
-            LETSENCRYPT_HOST: apis.softwareshinobi.com
+            LETSENCRYPT_HOST: apis.softwareshinobi.online
 
-    docs.apis.softwareshinobi.com:
+    software-shinobi-app:
 
-        container_name: docs.apis.softwareshinobi.com
+        container_name: software-shinobi-app
 
-        image: softwareshinobi/apis.softwareshinobi.com:docs
+        image: softwareshinobi/software-shinobi-app:production
+
+        build:
+
+            context: app
+
+            dockerfile: Dockerfile
+
+        restart: always
+
+        ports:
+
+            - "8880:80"
+
+        environment:
+
+            VIRTUAL_HOST: app.softwareshinobi.online
+
+            LETSENCRYPT_HOST: app.softwareshinobi.online
+
+    software-shinobi-docs:
+
+        container_name: software-shinobi-docs
+
+        image: softwareshinobi/software-shinobi-docs:production
 
         build:
 
@@ -184,6 +208,6 @@ services:
 
         environment:
 
-            VIRTUAL_HOST: docs.apis.softwareshinobi.come
+            VIRTUAL_HOST: docs.apis.softwareshinobi.online
 
-            LETSENCRYPT_HOST: docs.apis.softwareshinobi.com
+            LETSENCRYPT_HOST: docs.apis.softwareshinobi.online
